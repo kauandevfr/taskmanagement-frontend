@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 7006,
     host: '0.0.0.0',
-    // allowedHosts: [''],
+    allowedHosts: ['gerenciadordetarefas-frontend.el6nxv.easypanel.host'],
     cors: true,
   },
   preview: {
-    // allowedHosts: [''],
+    allowedHosts: ['gerenciadordetarefas-frontend.el6nxv.easypanel.host'],
     cors: true,
   }
 })
