@@ -5,11 +5,12 @@
 
     position: fixed;
     top: 2rem;
-    right: 2rem;
+    right: 1rem;
     z-index: 100;
 
     span {
         font-size: 1.8rem;
         color: var(--white);
+        text-align: center;
     }
 }
