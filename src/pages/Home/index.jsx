@@ -10,6 +10,7 @@ import instance from '../../services/instance';
 import './style.scss';
 import UserModal from "../../components/UserModal";
 import AlertModal from "../../components/AlertModal";
+import { motion } from 'framer-motion'
 
 export default function Home() {
 
@@ -220,8 +221,13 @@ export default function Home() {
                         </button>
                     </div>
                     {tasks.loading ? <span>Carregando...</span>
-                        : filtered.length ? filtered.map(task => (
-                            <li className='tasks-row' key={task.id}>
+                        : filtered.length ? filtered.map((task, index) => (
+                            <motion.li className='tasks-row'
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ delay: index * 0.05, duration: 0.5 }}
+                                key={task.id}>
                                 <div className="horizontal-align gap1" onClick={() => completeTask(task)}    >
                                     <div className={`container-status ${task.completed && "completed"}`} ></div>
                                     <h2 className='task-description'
@@ -269,7 +275,7 @@ export default function Home() {
                                         </svg>
                                     </button>
                                 </div>
-                            </li>
+                            </motion.li>
                         )) :
                             <div className='without-list w100 center-align p2'>
                                 <svg

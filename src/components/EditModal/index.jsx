@@ -54,17 +54,18 @@ export default function EditModal() {
             onClose={handleClose}
             onSubmit={handleSubmit(handleEdit)}
         >
-            <div className="ai-center horizontal-align gap1 w100">
+            <div className="horizontal-align gap1 w100">
                 <input
                     className='input-checkbox'
                     type="checkbox"
                     {...register("completed")}
                 />
-                <input
-                    className={`input ${errors.description && 'error'}`}
-                    type="text"
+
+                <textarea className={`input ${errors.description && 'error'}`}
                     {...register('description')}
-                />
+                    rows={6}
+                    autoFocus
+                ></textarea>
             </div>
             {errors.description && <span className='span-error'>{errors.description.message}</span>}
             <button

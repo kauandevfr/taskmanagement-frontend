@@ -37,6 +37,12 @@ export function GlobalProvider({ children }) {
     });
 
     const listTasks = async () => {
+
+        setTasks({
+            loading: true,
+            items: []
+        })
+
         try {
             const { data } = await instance.get('/tasks')
 
