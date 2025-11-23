@@ -1,0 +1,67 @@
+[data-theme="dark"] {
+
+    .page,
+    #root {
+        background-color: var(--gray-800);
+    }
+
+    .tasks-header__content {
+
+        .title {
+            color: var(--orange-900);
+        }
+    }
+
+    .tasks-header__content,
+    .form-task,
+    .tasks-list,
+    .form {
+        background-color: var(--gray-700);
+    }
+
+    .tasks-row,
+    .without-list {
+        background-color: var(--gray-800);
+    }
+
+    .title,
+    .subtitle,
+    .task-description,
+    .button,
+    .input,
+    .without-list,
+    .label,
+    .link {
+        color: var(--white);
+    }
+
+    .button {
+        background-color: var(--gray-700);
+    }
+
+    .input {
+        background-color: var(--gray-700);
+        border: 1px solid var(--gray-600);
+    }
+
+    .modal-content {
+        background-color: var(--gray-800);
+    }
+
+    .edit-icon,
+    .theme-icon,
+    .close-icon,
+    .pass-icon,
+    .logout-icon {
+        path {
+            fill: var(--white);
+        }
+    }
+
+    .user-icon,
+    .delete-icon {
+        path {
+            stroke: var(--white);
+        }
+    }
+}

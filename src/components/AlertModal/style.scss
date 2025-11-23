@@ -1,0 +1,15 @@
+.alert {
+    border-radius: var(--b-radius);
+    padding: 1rem 4rem;
+    width: fit-content;
+
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+
+    span {
+        font-size: 1.8rem;
+        color: var(--white);
+    }
+}

@@ -1,0 +1,50 @@
+.center-align,
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+.center-align {
+    justify-content: center;
+    flex-direction: column;
+}
+
+.vertical-align {
+    flex-direction: column;
+}
+
+.horizontal-align {
+    display: flex;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.gap1 {
+    gap: 1rem;
+}
+
+.gap2 {
+    gap: 2rem;
+}
+
+.p2 {
+    padding: 2rem;
+}
+
+.ai-center {
+    align-items: center;
+}
+
+.jc-between {
+    justify-content: space-between;
+}
+
+.bg-blue-1000 {
+    background-color: var(--blue-1000);
+}
+
+.text-color-white {
+    color: var(--white);
+}

@@ -1,0 +1,44 @@
+.button {
+    all: unset;
+    border-radius: 1rem;
+    padding: 1.3rem;
+
+    font-size: 1.5rem;
+    background-color: var(--white);
+
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.7rem;
+    letter-spacing: 1.2px;
+
+    text-transform: capitalize;
+    word-break: keep-all;
+    transition: all .5s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    &.send-task {
+        background-color: var(--green-1000);
+    }
+
+    svg,
+    img {
+        width: 2.2rem;
+        box-sizing: content-box;
+    }
+}
+
+.button:hover {
+    transform: scale(1.01);
+}
+
+.button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}

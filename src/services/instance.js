@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://tasks-management-back-end.cyclic.app/',
-    // baseURL: 'http://localhost:3000',
+    baseURL: import.meta.env.VITE_API_URL,
     timeout: 10000,
-    headers: { 'Content-Type': 'application/json' }
-})
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+    }
+});
 
 export default instance;

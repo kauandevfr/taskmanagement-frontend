@@ -1,0 +1,129 @@
+@media (max-width:850px) {
+
+    .update-pass {
+        .horizontal-align {
+            flex-direction: column;
+        }
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+    .label,
+    .button,
+    .input,
+    .subtitle {
+        font-size: 1.4rem;
+    }
+
+    .page-tasks,
+    .tasks-header {
+        padding: 2rem 1rem;
+    }
+
+    .form-task,
+    .tasks-list,
+    .tasks-header__content {
+        width: 100% !important;
+    }
+
+    .button {
+        padding: .8rem;
+
+        svg {
+            width: 1.6rem;
+            height: 1.6rem;
+        }
+    }
+}
+
+@media (max-width:420px) {
+
+    .tasks-header,
+    .footer {
+        position: static;
+    }
+
+    .footer {
+        border-radius: 0;
+    }
+
+    .tasks-header__content,
+    .tasks-ordering {
+        justify-content: center;
+    }
+
+    .tasks-header .title {
+        font-size: 2rem;
+    }
+
+    .form-task,
+    .tasks-list {
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+    .form-task .input {
+        width: 100%;
+    }
+
+
+    .tasks-list {
+        box-shadow: none;
+    }
+
+
+}
+
+@media (max-width:1150px) {
+    .form {
+        width: 60%;
+    }
+}
+
+@media (max-width:600px) {
+    .form {
+        width: 87%;
+    }
+}
+
+@media (max-width:360px) {
+    .form {
+        width: 100%;
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    .title {
+        font-size: 2rem;
+    }
+
+}
+
+@media (max-width:1000px) {
+    .modal-content {
+        width: 72%;
+    }
+
+}
+
+@media (max-width:600px) {
+    .modal-content {
+        width: 90%;
+    }
+}
+
+@media (max-width:420px) {
+    .modal-content {
+        width: 96%;
+    }
+
+    .modal-buttons {
+        width: 100%;
+    }
+
+    .modal-buttons .button {
+        font-size: 1.4rem;
+    }
+}

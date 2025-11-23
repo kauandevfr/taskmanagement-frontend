@@ -1,0 +1,36 @@
+.input {
+    all: unset;
+    border-radius: 1rem;
+    padding: 1.3rem;
+    font-size: 1.5rem;
+    background-color: var(--white);
+    width: calc(100% - 2.6rem);
+}
+
+.input-label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.input-checkbox[type="checkbox"]:checked {
+    background-color: var(--green-1000);
+}
+
+.input.error {
+    border: 1px solid var(--red-1000);
+}
+
+.input-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 2.2rem;
+    height: 2.2rem;
+
+    background-color: var(--gray-200);
+    border: none;
+    border-radius: var(--b-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}

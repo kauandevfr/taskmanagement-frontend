@@ -1,0 +1,88 @@
+.title {
+    font-size: 2.8rem;
+    font-weight: 600;
+
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-weight: 100;
+    text-align: center;
+}
+
+.form-task .title {
+    color: var(--white-100);
+}
+
+.label {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.7rem;
+    letter-spacing: 1.2px;
+}
+
+.task-action:hover,
+.task-action {
+    transition: .5s;
+}
+
+.task-action:hover {
+    transform: scale(1.01);
+}
+
+.link {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    text-decoration: none;
+    letter-spacing: -0.2px;
+    text-align: center;
+}
+
+.form {
+    width: 27%;
+    box-shadow: 0px 7px 15px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+.form,
+.modal-content {
+    padding: 3rem;
+    border-radius: 15px;
+    background-color: var(--gray-100);
+    gap: 2rem;
+}
+
+.span-error {
+    color: var(--red-1000);
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.container-status {
+    width: 2.2rem;
+    height: 2.2rem;
+
+    background-color: var(--gray-200);
+    border: none;
+    border-radius: var(--b-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &.completed {
+        background-color: var(--green-1000);
+    }
+}
+
+.access-account {
+    padding: 2rem;
+    border-radius: var(--b-radius);
+    // color: var(--white);
+
+    .icon {
+        width: 10rem;
+        border-radius: 50%;
+        background-color: var(--blue-1000);
+        padding: 1.6rem;
+    }
+}

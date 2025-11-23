@@ -1,59 +1,77 @@
-import { Modal } from '@mui/material'
-import { useContext } from 'react'
-import { useState } from 'react'
-import { GlobalContext } from '../../providers/globalContext'
-import instance from '../../services/instance'
-import './style.css'
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { GlobalContext } from '../../providers/globalContext';
+import updateTask from '../../schemas/task/update';
+import instance from '../../services/instance';
+import ModalBase from '../ModalBase';
+import './style.scss';
 
 export default function EditModal() {
 
-    const { editInfos, setEditInfos } = useContext(GlobalContext)
+    const { editInfos, setEditInfos, listTasks, setAlertModal } = useContext(GlobalContext)
 
-    function handleClose() {
-        setEditInfos({ id: '', value: [], show: false })
-    }
+    const { setValue, register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(updateTask)
+    });
 
-    async function handleEdit(e) {
-        e.preventDefault()
+    const handleClose = () => { setEditInfos({ task: {}, show: false }) }
+
+    const handleEdit = async data => {
+        const id = editInfos.task.id
         try {
-            await instance.put(`/task/${editInfos.id}`, {
-                description: editInfos.description,
-                completed: editInfos.completed
-            }, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-            })
-            handleClose()
+            await instance.put(`/task/${id}`, data)
 
+            setAlertModal({
+                sucess: true,
+                open: true,
+                message: "Tarefa atualizada com sucesso."
+            })
+
+            handleClose()
+            listTasks()
         } catch (error) {
             return console.log(error)
         }
     }
 
+    useEffect(() => {
+        if (editInfos.show) {
+            const task = editInfos.task
+
+            console.log(task)
+
+            setValue("description", task.description)
+            setValue("completed", task.completed)
+        }
+    }, [editInfos.show])
+
     return (
-        <Modal
-            className='center-align modal-bg'
-            open={editInfos.show}
+
+        <ModalBase
+            title="Editar tarefa"
+            isOpen={editInfos.show}
             onClose={handleClose}
+            onSubmit={handleSubmit(handleEdit)}
         >
-            <form className='modal-content vertical-align' onSubmit={handleEdit}>
-                <h1 className='title' style={{ marginBottom: '1rem' }}>Editar tarefa</h1>
-                <input className='input'
+            <div className="ai-center horizontal-align gap1 w100">
+                <input
+                    className='input-checkbox'
+                    type="checkbox"
+                    {...register("completed")}
+                />
+                <input
+                    className={`input ${errors.description && 'error'}`}
                     type="text"
-                    value={editInfos.description}
-                    style={{ marginBottom: '1rem' }}
-                    onChange={(e) => setEditInfos({ ...editInfos, description: e.target.value })} />
-                <button
-                    type='button'
-                    className='button'
-                    onClick={() => setEditInfos({ ...editInfos, completed: !editInfos.completed })}
-                    style={{ backgroundColor: editInfos.completed && 'var(--lightgray)' }}>
-                    {editInfos.completed ? 'Completa' : 'Incompleta'}
-                </button>
-                <div className='modal-buttons'>
-                    <button className='button' type='submit' onClick={handleEdit} disabled={!editInfos.description ? true : false}>Editar</button>
-                    <button className='button' type='button' onClick={handleClose}>Cancelar</button>
-                </div>
-            </form>
-        </Modal>
+                    {...register('description')}
+                />
+            </div>
+            {errors.description && <span className='span-error'>{errors.description.message}</span>}
+            <button
+                className='button'
+                type='submit'>
+                Concluir
+            </button>
+        </ModalBase>
     )
 }

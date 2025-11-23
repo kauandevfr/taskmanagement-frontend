@@ -3,16 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
 
-.password-button {
-    all: unset;
-    margin-left: .7rem;
-    border-radius: 1rem;
-    padding: 1.3rem;
-    box-shadow: 13px 13px 36px #acacac75;
-    transition: .6s;
-    cursor: pointer;
+    gap: 1rem;
 }
 
 .password-button:hover {

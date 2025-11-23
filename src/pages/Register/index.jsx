@@ -1,55 +1,61 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordInput from '../../components/PasswordInput'
 import instance from '../../services/instance'
-import './style.css'
+import './style.scss'
+import { useGlobalContext } from '../../providers/globalContext'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { addUser } from '../../schemas/user/add'
+import AlertModal from "../../components/AlertModal"
 
 export default function Register() {
     const navigate = useNavigate()
 
-    const [registerForm, setRegisterForm] = useState({
-        name: '',
-        email: '',
-        password: ''
-    })
+    const { showError, setAlertModal } = useGlobalContext()
 
-    const [registerError, setRegisterError] = useState({ message: '', type: '' })
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(addUser)
+    });
 
-    async function handleRegister(e) {
-        e.preventDefault();
-        setRegisterError({ message: '', type: '' })
-
+    const handleRegister = async data => {
         try {
-            await instance.post('/user', { ...registerForm })
+            await instance.post('/user', data)
+
+            setAlertModal({
+                sucess: true,
+                open: true,
+                message: 'Usuário registrado com sucesso.'
+            })
+
             navigate('/')
         } catch (error) {
-            const message = error.response.data;
-
-            if (message === 'Email já cadastrado.' || message === 'Email no formato inválido.') {
-                setRegisterForm({ ...registerForm, email: '' })
-                return setRegisterError({ message, type: 'invalidEmail' })
-            }
-
-            if (message === 'A senha precisa ter no mínimo 6 caracteres.') {
-                setRegisterForm({ ...registerForm, password: '' })
-                return setRegisterError({ message, type: 'invalidPass' })
-            }
-
-            console.log(error)
-            return setRegisterError({ message: 'Erro interno. Tente Novamente.', type: undefined })
+            return showError(error)
         }
     }
 
     useEffect(() => {
         if (localStorage.getItem('token')) { return navigate('/dashboard') }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <main className='page center-align'>
-            <h1 className='title'>Crie a sua conta</h1>
-            <form className='form vertical-align' onSubmit={handleRegister}>
+            <form className='form vertical-align' onSubmit={handleSubmit(handleRegister)}>
+                <div className="access-account vertical-align gap1">
+                    <div className="icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 5.00005C7.01165 5.00082 6.49359 5.01338 6.09202 5.21799C5.71569 5.40973 5.40973 5.71569 5.21799 6.09202C5 6.51984 5 7.07989 5 8.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.07989 21 8.2 21H15.8C16.9201 21 17.4802 21 17.908 20.782C18.2843 20.5903 18.5903 20.2843 18.782 19.908C19 19.4802 19 18.9201 19 17.8V8.2C19 7.07989 19 6.51984 18.782 6.09202C18.5903 5.71569 18.2843 5.40973 17.908 5.21799C17.5064 5.01338 16.9884 5.00082 16 5.00005M8 5.00005V7H16V5.00005M8 5.00005V4.70711C8 4.25435 8.17986 3.82014 8.5 3.5C8.82014 3.17986 9.25435 3 9.70711 3H14.2929C14.7456 3 15.1799 3.17986 15.5 3.5C15.8201 3.82014 16 4.25435 16 4.70711V5.00005"
+                                stroke="var(--white)"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </div>
+                    <h1 className='title'>Gerenciamento de Tarefas</h1>
+                    <h2 className='subtitle'>Registre-se agora.</h2>
+                </div>
                 <div className='input-label'>
                     <label className='label' htmlFor='name'>Nome</label>
                     <input
@@ -57,41 +63,39 @@ export default function Register() {
                         type="text"
                         placeholder='Digite o seu nome'
                         id='name'
-                        value={registerForm.name}
-                        onChange={(e) => setRegisterForm({ ...registerForm, name: e.target.value })}
-                        required />
+                        required
+                        {...register('name')}
+                    />
+                    {errors.name && <span className='span-error'>{errors.name.message}</span>}
+
                 </div>
                 <div className='input-label'>
                     <label className='label' htmlFor='email'>Email</label>
                     <input
-                        className={`input ${registerError.type === 'invalidEmail' && 'input-error'}`}
+                        className={`input`}
                         type="email"
                         placeholder='Digite um email'
                         id='email'
-                        value={registerForm.email}
-                        onChange={(e) => setRegisterForm({ ...registerForm, email: e.target.value })}
-                        required />
+                        required
+                        {...register('email')}
+                    />
+                    {errors.email && <span className='span-error'>{errors.email.message}</span>}
                 </div>
                 <div className='input-label'>
                     <label className='label' htmlFor='password'>Senha</label>
                     <PasswordInput
                         id='password'
-                        className={registerError.type === 'invalidPass' && 'input-error'}
-                        value={registerForm.password}
-                        onChange={(e) => setRegisterForm({ ...registerForm, password: e.target.value })}
+                        {...register('password')}
                     />
+                    {errors.password && <span className='span-error'>{errors.password.message}</span>}
                 </div>
                 <button
-                    className='button'
+                    className='button w100 bg-blue-1000 bg-blue-1000 text-color-white'
                     type='submit'
-                    disabled={
-                        !registerForm.name ||
-                            !registerForm.email ||
-                            !registerForm.password ? true : false}
-                >Cadastrar</button>
-                {registerError.message && <span className='span-error'>{registerError.message}</span>}
+                >Registrar</button>
                 <Link className='link' to='/'>Já tem uma conta? Faça login</Link>
             </form>
+            <AlertModal />
         </main>
     )
 
