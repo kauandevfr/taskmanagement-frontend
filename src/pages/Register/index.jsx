@@ -20,7 +20,7 @@ export default function Register() {
 
     const handleRegister = async data => {
         try {
-            await instance.post('/user', data)
+            await instance.post('/user/register', data)
 
             setAlertModal({
                 sucess: true,

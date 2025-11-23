@@ -19,7 +19,7 @@ export default function Login() {
     const handleLogin = async data => {
 
         try {
-            await instance.post('/login', data);
+            await instance.post('/user/login', data);
 
             setAlertModal({
                 sucess: true,
