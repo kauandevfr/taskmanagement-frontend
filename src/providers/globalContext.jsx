@@ -27,7 +27,7 @@ export function GlobalProvider({ children }) {
             html.setAttribute("data-theme", data.theme);
 
         } catch (error) {
-            return console.log(error)
+            return showError(error)
         }
     }
 
@@ -42,11 +42,11 @@ export function GlobalProvider({ children }) {
 
             return setTasks({
                 loading: false,
-                items: data.sort((a, b) => new Date(a.createdat) - new Date(b.createdat))
+                items: data
             })
 
         } catch (error) {
-            return console.log(error)
+            return showError(error)
         }
     };
 
