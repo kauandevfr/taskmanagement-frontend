@@ -38,11 +38,13 @@ export default function UserModal() {
         }
     };
 
-    const handleLogout = () => {
-        localStorage.clear();
+    const handleLogout = async () => {
+
+        await instance.post('/user/logout')
 
         handleClose();
         navigate('/');
+
         document.documentElement.removeAttribute('data-theme');
     };
 

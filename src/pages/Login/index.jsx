@@ -19,9 +19,7 @@ export default function Login() {
     const handleLogin = async data => {
 
         try {
-            const { data: response } = await instance.post('/login', data);
-
-            localStorage.setItem('token', response.token);
+            await instance.post('/login', data);
 
             setAlertModal({
                 sucess: true,
@@ -35,10 +33,6 @@ export default function Login() {
         }
 
     }
-
-    useEffect(() => {
-        if (localStorage.getItem('token')) { return navigate('/dashboard') }
-    }, [])
 
     return (
         <main className='page center-align'>

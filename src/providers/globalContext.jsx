@@ -8,7 +8,6 @@ export const useGlobalContext = () => {
 };
 
 export function GlobalProvider({ children }) {
-    const token = localStorage.getItem('token')
     const [deleteTask, setDeleteTask] = useState({
         id: '',
         show: false
@@ -93,8 +92,6 @@ export function GlobalProvider({ children }) {
                 setUser,
 
                 listUser,
-
-                token,
 
                 listTasks,
                 tasks,

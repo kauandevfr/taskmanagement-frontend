@@ -34,10 +34,6 @@ export default function Register() {
         }
     }
 
-    useEffect(() => {
-        if (localStorage.getItem('token')) { return navigate('/dashboard') }
-    }, [])
-
     return (
         <main className='page center-align'>
             <form className='form vertical-align' onSubmit={handleSubmit(handleRegister)}>
