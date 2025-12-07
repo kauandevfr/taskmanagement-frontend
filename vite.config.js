@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 7006,
     host: '0.0.0.0',
-    allowedHosts: ['gerenciadordetarefas-frontend.el6nxv.easypanel.host'],
+    allowedHosts: ['tarefas.kauanrodrigues.com.br'],
     cors: true,
   },
   preview: {
-    allowedHosts: ['gerenciadordetarefas-frontend.el6nxv.easypanel.host'],
+    allowedHosts: ['tarefas.kauanrodrigues.com.br'],
     cors: true,
   }
 })
