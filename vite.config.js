@@ -6,11 +6,11 @@ export default defineConfig({
   server: {
     port: 7006,
     host: '0.0.0.0',
-    allowedHosts: ['tarefas.kauanrodrigues.com.br'],
+    allowedHosts: ['tarefas.kauanrodrigues.com.br', 'www.tarefas.kauanrodrigues.com.br'],
     cors: true,
   },
   preview: {
-    allowedHosts: ['tarefas.kauanrodrigues.com.br'],
+    allowedHosts: ['tarefas.kauanrodrigues.com.br', 'www.tarefas.kauanrodrigues.com.br'],
     cors: true,
   }
 })
